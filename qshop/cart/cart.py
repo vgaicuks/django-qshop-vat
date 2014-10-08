@@ -253,29 +253,3 @@ class Cart:
     def checkout(self):
         self.cart.checked_out = True
         self.cart.save()
-
-    def total_price_with_vat(self):
-        try:
-            return self._total_price_with_vat
-        except:
-            self._total_price_with_vat = self.total_vat() + self.total_price()
-        return self._total_price_with_vat
-
-    def total_vat(self):
-        try:
-            return self._total_vat
-        except:
-            self._total_vat = self.total_price() * 0.21
-        return self._total_vat
-
-    def with_vat_as_table(self, standalone=False):
-        link_add = ''
-        image_add = ''
-        if standalone:
-            link_add = '{0}'.format(qshop_settings.CART_TABLE_LINK_ADD if qshop_settings.CART_TABLE_LINK_ADD else settings.SITE_URL)
-            image_add = '{0}'.format(qshop_settings.CART_TABLE_IMAGE_ADD if qshop_settings.CART_TABLE_IMAGE_ADD else settings.SITE_URL)
-        return render_to_string('qshop/cart/_cart_with_vat_as_table.html', {
-            'LINK_ADD': link_add,
-            'IMAGE_ADD': image_add,
-            'cart': self,
-        })
