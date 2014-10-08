@@ -29,9 +29,13 @@ class PaypalPayment(BasePayment):
     def get_redirect_response(self, order):
         cart = order.cart.get_cartobject()
         currency_code = cart.get_currency().code.upper()
-        total_price = cart.total_price()
-        total_price = "%.2f" % total_price
 
+        if order.with_vat:
+            total_price = cart.total_price_with_vat()
+        else:
+            total_price = cart.total_price()
+
+        total_price = "%.2f" % total_price
 
         if currency_code not in ALLOWED_CURRENCIES:
             raise Exception('Unsupported currency')

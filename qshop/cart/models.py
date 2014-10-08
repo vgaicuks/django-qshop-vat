@@ -149,6 +149,8 @@ class OrderAbstract(models.Model):
             self.status = 2
             self.payed = True
 
+    def with_vat(self):
+        return False
 
 class OrderAbstractDefault(OrderAbstract):
     name = models.CharField(_('name'), max_length=128)
