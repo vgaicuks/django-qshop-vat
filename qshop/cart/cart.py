@@ -258,14 +258,14 @@ class Cart:
         try:
             return self._total_price_with_vat
         except:
-            self._total_price_with_vat = self.total_vat() + self.total_price()
+            self._total_price_with_vat = self.total_vat() + self.total_price() + self.delivery_price()
         return self._total_price_with_vat
 
     def total_vat(self):
         try:
             return self._total_vat
         except:
-            self._total_vat = self.total_price() * 0.21
+            self._total_vat = (self.total_price() + self.delivery_price()) * 0.21
         return self._total_vat
 
     def with_vat_as_table(self, standalone=False):
