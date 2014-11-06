@@ -30,7 +30,7 @@ class PaypalPayment(BasePayment):
         cart = order.cart.get_cartobject()
         currency_code = cart.get_currency().code.upper()
 
-        if order.with_vat:
+        if order.with_vat():
             total_price = cart.total_price_with_vat()
         else:
             total_price = cart.total_price()
