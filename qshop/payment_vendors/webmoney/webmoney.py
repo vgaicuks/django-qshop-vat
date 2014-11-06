@@ -17,7 +17,7 @@ class WebmoneyPayment(BasePayment):
         if order.with_vat:
             total_price = cart.total_price_with_vat()
         else:
-            total_price = cart.total_price()
+            total_price = cart.total_price_with_delivery()
 
         total_price = "%.2f" % total_price
 
